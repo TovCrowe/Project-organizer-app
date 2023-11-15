@@ -30,6 +30,8 @@ export default function SignUp(){
         const existingUserByName = existingUsers.response.find((u:any) => u.name === createUser.name);
         if (existingUserByEmail && existingUserByName) {
           setError("User with this email already exists");
+          setSucces(""); 
+
           return;
         
         }
@@ -54,7 +56,6 @@ export default function SignUp(){
         } catch (error:any) {
           console.error("Error submitting the form:", error);
           setError("Error: " + error.message);
-          setSucces(""); 
         }        
         
 
@@ -83,7 +84,7 @@ export default function SignUp(){
         </div>
         <div className="flex flex-col mb-5">
           <label htmlFor="city" className="underline decoration-pink-600 font-mono">
-            Email
+            Email:
           </label>
           <input
             type="text"
@@ -96,7 +97,7 @@ export default function SignUp(){
         </div>
         <div className="flex flex-col mb-5">
           <label htmlFor="foundation" className="underline decoration-pink-600 font-mono">
-                Password
+                Password:
           </label>
           <input
             type="password"

@@ -6,7 +6,6 @@ export async function getUsers() {
     const response = await axios.get(url);
 
     if (response.status === 200) {
-      console.log(response.data);
       return response.data;
     } else {
       console.error("Error al obtener datos:", response.status);
@@ -32,6 +31,7 @@ export async function CreateUser(
       email: email,
       password: password,
     };
+
     const existingUsers = await getUsers();
     const existingUserByEmail = existingUsers.response.find((u:any) => u.email === email);
     const existingUserByName = existingUsers.response.find((u:any) => u.name === name);
@@ -61,4 +61,24 @@ export async function CreateUser(
     console.error("Error:", error);
     return null;
   }
+}
+
+interface User {
+  name: string;
+  password: string;
+}
+
+
+export async function authentification(user:User){
+  const url = `${process.env.NEXT_PUBLIC_DATABASE_URL}/API/Auth`
+
+  try{
+
+    const response = await axios.post(url, user);
+    console.log(response);
+    return response;
+    
+  } catch (error){
+    console.log("error in the server", error)
+}
 }

@@ -7,21 +7,7 @@ import { useEffect } from 'react'
 
 
 export default function Home() {
-  interface User  {
-    userId: number;
-    name:string;
-    email:string;
-  }
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-        const users = await getUsers();
-        console.log("Lista de usuarios:", users);
-        console.log(users.response.find((u:User) => u.name === "Claudia"));
-    }
-
-    fetchUsers();
-}, []);
 
   return (
     <div className="min-h-screen flex-col items-center justify-between p-20">

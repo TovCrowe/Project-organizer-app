@@ -1,6 +1,9 @@
 'use client'
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
+import Link from 'next/link';
+
+
 
 
 export default function App() {
@@ -44,12 +47,12 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link color="secondary" href="#">Login</Link>
+          <Link color="secondary"  href="/login">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="secondary" href="/signup" variant="flat">
+          <Link  color="secondary" href="/signup" className=" rounded-xl bg-purple-950 p-2">
             Sign Up
-          </Button>
+          </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
