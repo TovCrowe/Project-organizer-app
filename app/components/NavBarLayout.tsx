@@ -1,20 +1,40 @@
-'use client'
-import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
-import Link from 'next/link';
-
-
-
+"use client";
+import { useState, useEffect } from "react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Button,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Link as LinkBoard
+} from "@nextui-org/react";
+import Link from "next/link";
+import Decoder from "../utilities/Decoder"
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [user, setUser] = useState<UserJSON | any>()
+  interface UserJSON {
+    sub: string;
+    exp: number;
+    iss: string;
+    aud: string;
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Log Out",
-  ];
+  } 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(token){
+      const userCode:UserJSON = Decoder(token);
+      setUser(userCode);
+      setLogin(true);
+    }
+  },[login])
+
+  const menuItems = ["Profile", "Dashboard", "Activity", "Log Out"];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className=" bg-green-950">
@@ -35,39 +55,56 @@ export default function App() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link  className="text-white" href="#" aria-current="page">
+          <Link className="text-white" href="#" aria-current="page">
             Customers
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link  className="text-white" href="#">
+          <Link className="text-white" href="#">
             Integrations
           </Link>
-        </NavbarItem> 
+        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link color="secondary"  href="/login">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link  color="secondary" href="/signup" className=" rounded-xl bg-purple-950 p-2">
-            Sign Up
-          </Link>
-        </NavbarItem>
+      {login ? (
+        <>
+          {<NavbarItem className="rounded-lg border p-2 ">
+              Welcome {user.sub}!
+             </NavbarItem>}
+        </>
+      ) : (
+        <>
+          <NavbarItem className="hidden lg:flex ">
+            <Link className="text-secondary" href="/login">
+              Login
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link className="rounded-xl bg-purple-950 p-2 text-secondary" href="/signup">
+              Sign Up
+            </Link>
+          </NavbarItem>
+        </>
+      )} 
+ 
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
+            <LinkBoard
               color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                index === 2
+                  ? "primary"
+                  : index === menuItems.length - 1
+                  ? "danger"
+                  : "foreground"
               }
               className="w-full"
               href="#"
               size="lg"
             >
               {item}
-            </Link>
+            </LinkBoard>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>

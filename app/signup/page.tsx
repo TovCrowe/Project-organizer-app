@@ -17,7 +17,6 @@ export default function SignUp(){
         password: ''
     })
 
-
     const handleSubmit = async (e: any) => { 
         e.preventDefault();
         if( createUser.name === "" || createUser.email === "" || createUser.password === ""){

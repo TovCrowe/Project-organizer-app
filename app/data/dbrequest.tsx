@@ -75,7 +75,6 @@ export async function authentification(user:User){
   try{
 
     const response = await axios.post(url, user);
-    console.log(response);
     return response;
     
   } catch (error){

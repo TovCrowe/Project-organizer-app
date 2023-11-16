@@ -1,9 +1,9 @@
 import React from 'react'
 
-function page() {
+function Dashboard() {
   return (
-    <div className=' min-h-full'>page</div>
+    <div className=' max-h-full'>page</div>
   )
 }
 
-export default page
+export default Dashboard
