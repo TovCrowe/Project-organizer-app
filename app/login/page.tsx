@@ -26,7 +26,9 @@ export default function LogIn() {
         setError("");
         const token = response.data.token;
         localStorage.setItem("token", token);
-        router.push("/");
+        if(localStorage.getItem('token')){
+          window.location.href = '/'
+        }
       } else {
         setError("UserName or Password is not correct");
       }
@@ -48,7 +50,7 @@ export default function LogIn() {
         <div className="flex flex-col mb-5">
           <label
             htmlFor="name"
-            className="underline decoration-pink-600 font-mono"
+            className="underline decoration-pink-600 font-mono text-white"
           >
             User Name:
           </label>
@@ -67,7 +69,7 @@ export default function LogIn() {
         <div className="flex flex-col mb-5">
           <label
             htmlFor="foundation"
-            className="underline decoration-pink-600 font-mono"
+            className="underline decoration-pink-600 font-mono text-white"
           >
             Password
           </label>

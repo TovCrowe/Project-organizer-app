@@ -13,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import Decoder from "../utilities/Decoder"
+import { loadavg } from "os";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,50 +26,49 @@ export default function App() {
     aud: string;
 
   } 
+  //localStorage.removeItem('token');
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if(token){
-      const userCode:UserJSON = Decoder(token);
-      setUser(userCode);
+    if (token) {
+      setUser(Decoder(token));
       setLogin(true);
     }
-  },[login])
+  }, []);
+  
 
-  const menuItems = ["Profile", "Dashboard", "Activity", "Log Out"];
+  
+
+  const menuItems = ["Dashboard" ,"Profile",  "Log Out"];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className=" bg-green-950">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
+          className="sm:hidden text-white"
         />
         <NavbarBrand>
-          <p className="font-bold text-inherit text-black">HWDO</p>
+          <p className="font-bold text-inherit text-white">HWDO</p>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link className="text-white" href="#">
-            Features
-          </Link>
+          <LinkBoard className="text-white" href="dashboard">
+          Dashboard
+          </LinkBoard>
         </NavbarItem>
         <NavbarItem>
           <Link className="text-white" href="#" aria-current="page">
-            Customers
+            Profile
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link className="text-white" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
+        
       </NavbarContent>
       <NavbarContent justify="end">
       {login ? (
         <>
-          {<NavbarItem className="rounded-lg border p-2 ">
+          {<NavbarItem className="rounded-lg border p-2 text-white">
               Welcome {user.sub}!
              </NavbarItem>}
         </>
@@ -100,7 +100,7 @@ export default function App() {
                   : "foreground"
               }
               className="w-full"
-              href="#"
+              href={`${item.toLowerCase()}`}
               size="lg"
             >
               {item}

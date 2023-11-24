@@ -10,12 +10,12 @@ export default function Home() {
 
 
   return (
-    <div className="min-h-screen flex-col items-center justify-between p-20">
+    <div className="min-h-screen flex-col items-center justify-between p-20 text-slate-50">
        <div className="container mx-auto p-8">
       <h2 className="text-3xl font-bold mb-4 underline decoration-pink-500">About Our Project</h2>
 
       <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-2">HHDO</h3>
+        <h3 className="text-xl font-semibold mb-2 text-white">HHDO</h3>
       </section>
 
       <section className="mb-8">

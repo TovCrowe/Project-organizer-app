@@ -9,7 +9,8 @@ import { create } from 'domain';
 export default function SignUp(){
     const [error, setError] = useState("");
     const [succes, setSucces] = useState('');
-   
+    const hola = getUsers();
+    console.log(hola);
 
     const [createUser, setCreateUser] = useState({
         name:'',
@@ -25,6 +26,8 @@ export default function SignUp(){
         }
 
         const existingUsers = await getUsers();
+        console.log(existingUsers);
+        
         const existingUserByEmail = existingUsers.response.find((u:any) => u.email === createUser.email);
         const existingUserByName = existingUsers.response.find((u:any) => u.name === createUser.name);
         if (existingUserByEmail && existingUserByName) {
@@ -61,9 +64,9 @@ export default function SignUp(){
      }
 
 
-
+     
     return (
-        <div className='min-h-screen flex flex-col items-center'>
+        <div className='min-h-screen flex flex-col items-center text-white'>
       <h1 className="text-center text-6xl text-green-900 mb-8 font-bold p-3 pt-5 font-mono">
         Make your account
       </h1>

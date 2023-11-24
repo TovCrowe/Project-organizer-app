@@ -2,7 +2,7 @@ import React from 'react'
 
 function Dashboard() {
   return (
-    <div className=' max-h-full'>page</div>
+    <div className=' min-h-screen'>page</div>
   )
 }
 
